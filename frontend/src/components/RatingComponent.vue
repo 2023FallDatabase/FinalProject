@@ -1,6 +1,6 @@
 <template>
   <div class="rating-system">
-    <span v-for="star in 5" :key="star" class="star" @click="setRating(star)">
+    <span v-for="star in maxStars" :key="star" class="star" @click="setRating(star)" :aria-label="'Star ' + star">
       {{ star <= rating ? '★' : '☆' }}
     </span>
   </div>
@@ -9,7 +9,17 @@
 <script>
 export default {
   name: 'RatingComponent',
-  props: ['initialRating'],
+  props: {
+    initialRating: {
+      type: Number,
+      default: 0,
+      validator: (value) => value >= 0 && value <= 5
+    },
+    maxStars: {
+      type: Number,
+      default: 5
+    }
+  },
   data() {
     return {
       rating: this.initialRating
