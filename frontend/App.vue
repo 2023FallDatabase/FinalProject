@@ -62,5 +62,3 @@ footer {
   width: 100%;
 }
 </style>
-
-
