@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # dbqq
 
 ## Project setup
@@ -22,3 +23,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+# FinalProject
+This repo is for 4 students of Database final project.
+>>>>>>> 7bd834a280fed58ac463d850138e2e848e5d7896
