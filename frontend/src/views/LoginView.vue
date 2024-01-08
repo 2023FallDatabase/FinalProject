@@ -1,14 +1,14 @@
 <template>
-  <div class="login-container">
-    <h1>Login</h1>
-    <form @submit.prevent="login">
+  <div class="LoginView-container">
+    <h1>Log in</h1>
+    <form @submit.prevent="LoginView">
       <label for="username">Username:</label>
       <input type="text" id="username" v-model="username" required />
 
       <label for="password">Password:</label>
       <input type="password" id="password" v-model="password" required />
 
-      <button type="submit">Login</button>
+      <button type="submit">Log in</button>
     </form>
   </div>
 </template>
@@ -22,13 +22,13 @@ export default {
     };
   },
   methods: {
-    login() {
-      // You can implement your login logic here
+    LoginView() {
+      // You can implement your LoginView logic here
       // For a simple example, we'll just log the entered username and password
       console.log("Username:", this.username);
       console.log("Password:", this.password);
 
-      // You may want to redirect the user to another page after successful login
+      // You may want to redirect the user to another page after successful LoginView
       // For example: this.$router.push('/dashboard');
     },
   },
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style scoped>
-.login-container {
+.LoginView-container {
   max-width: 300px;
   margin: auto;
   padding: 20px;
@@ -48,7 +48,7 @@ export default {
 
 h1 {
   text-align: center;
-  color: #3498db;
+  color: #a1d573;
 }
 
 label {
@@ -64,7 +64,7 @@ input {
 }
 
 button {
-  background-color: #3498db;
+  background-color: #a1d573;
   color: #fff;
   padding: 10px;
   border: none;

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import useComment from "../views/useComment.vue";
+import LoginView from '../views/LoginView.vue';
+import SignUp from '../views/SignUp.vue';
 import RatingComponent from "../views/RatingComponent.vue";
 
 Vue.use(VueRouter)
@@ -29,6 +31,16 @@ const routes = [
     path: "/RatingComponent",
     name: "RatingComponent",
     component: RatingComponent,
+  },
+  {
+    path: '/LoginView',
+    name: 'LoginView',
+    component: LoginView,
+  },
+  {
+    path: '/SignUp',
+    name: 'SignUp',
+    component: SignUp,
   },
 ]
 
