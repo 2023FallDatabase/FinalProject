@@ -33,6 +33,13 @@ export default {
     addComment(newComment) {
       this.comments.push(newComment);
     },
+    created() {
+      // 在 created 鉤子中獲取 $route.params.showId
+      this.showId = this.$route.params.showId;
+
+      // 根據 showId 執行相應的邏輯，例如獲取該 ID 的數據
+      this.fetchShowData(this.showId);
+    },
   },
 };
 </script>
