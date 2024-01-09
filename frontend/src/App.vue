@@ -3,6 +3,7 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">Add Film</router-link> |
+      <router-link to="/UpdateView">Update Film</router-link>|
       <router-link to="/useComment">useComment</router-link>|
       <router-link to="/LoginView">Log in</router-link>|
       <router-link to="/SignUp">Sign Up</router-link>
