@@ -178,14 +178,21 @@ export default {
 
 <style scoped>
 .table-header-cell {
-  background-color: #3498db;
+  background-color: #a1d573;
   color: #ffffff;
   padding: 10px;
   text-align: center;
-  border: 1px solid #2980b9;
+
   position: relative;
 }
+tr {
+  background-color: #f0fff0;
+  color: #272727;
+  padding: 10px;
+  text-align: center;
 
+  position: relative;
+}
 input {
   width: 100%;
   padding: 5px;
