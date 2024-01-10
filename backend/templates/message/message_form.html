@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}
+<!-- Add your title here -->
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'showformUrl' %}" method="post" class="smart-green">
+    <h1>Comments<span>Leave your message</span>
+    </h1>
+    <!-- Name Field -->
+    <label>
+        <span>Name:</span>
+        <input id="name" type="text" name="name" class="error" placeholder="Enter your name" />
+        <div class="error-msg"></div>
+    </label>
+
+    <!-- Show ID Field -->
+    <label>
+        <span>Show ID:</span>
+        <input id="show_id" type="text" name="show_id" placeholder="Type the show ID" />
+        <div class="error-msg"></div>
+    </label>
+
+    <!-- Comments Field -->
+    <label>
+        <span>Comments:</span>
+        <textarea id="message" name="message" placeholder="Provide your thoughts"></textarea>
+        <div class="error-msg"></div>
+    </label>
+
+    <!-- Rating Field -->
+    <label>
+        <span>Rating:</span>
+        <button type="button" class="rating-button" name="rating" value="1">☆</button>
+        <button type="button" class="rating-button" name="rating" value="2">☆</button>
+        <button type="button" class="rating-button" name="rating" value="3">☆</button>
+        <button type="button" class="rating-button" name="rating" value="4">☆</button>
+        <button type="button" class="rating-button" name="rating" value="5">☆</button>
+        <div class="error-msg"></div>
+    </label>
+
+    <!-- Success and Submit Messages -->
+    <div class="success-msg"></div>
+    <input type="submit" class="button" value="Submit" />
+
+    <!-- CSRF Token -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="SfHkbL4feo1G00sJQtbO7TtLN4c2BUwa" />
+    {% csrf_token %}
+
+</form>
+
+<!-- JavaScript for Rating Buttons -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ratingButtons = document.querySelectorAll('.rating-button');
+        let currentRating = 0;
+
+        ratingButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const clickedValue = parseInt(button.getAttribute('value'));
+                currentRating = clickedValue;
+                updateRatingButtons(currentRating);
+            });
+        });
+
+        function updateRatingButtons(rating) {
+            ratingButtons.forEach(function (button, index) {
+                if (index < rating) {
+                    button.textContent = '★';
+                } else {
+                    button.textContent = '☆';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

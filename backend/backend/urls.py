@@ -5,5 +5,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include('netflix.urls')),
     path('', include('account.urls')),
-    path('', include('social_django.urls', namespace='social')),
+    path('account/', include('social_django.urls', namespace='social')),
+    path('comment/', include('message.urls')),
 ]

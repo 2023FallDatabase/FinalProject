@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+Your Page Title
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'formUrl' %}" method="post" class="smart-green">
+    <h1>Comment Board
+        <span>Display Current and Historical Messages</span>
+    </h1>
+    {% for message in all_messages %}
+    <label>
+        <span>{{ message.name }}:</span><br>
+        <h2 class = 'w-msg'>{{ message.message }}</h2>
+        <!-- Display the rating score if available
+        {% if message.rating %}
+        <p>
+            Rating:
+            <span class="rating-stars">
+                {{ message.stars_filled }}{{ message.stars_empty }}
+            </span>
+        </p>
+        {% endif %} -->
+        <div class="error-msg"></div>
+    </label>
+    {% endfor %}
+    <div class="success-msg"></div>
+    <label>
+        <span>&nbsp;</span>
+        <input type="submit" class="button" value="Back" />
+    </label>
+    <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token }}' />
+    {% csrf_token %}
+</form>
+{% endblock %}

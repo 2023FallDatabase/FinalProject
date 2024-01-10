@@ -14,7 +14,7 @@ from .forms import UserRegistrationForm, LoginForm
 @login_required
 def dashboard(request):
     return render(request,
-                  'account/dashboard.html',
+                  'message/message_form.html',
                   {'section': 'dashboard'})
 
 
