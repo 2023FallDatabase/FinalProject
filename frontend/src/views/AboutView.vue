@@ -19,6 +19,18 @@
             </td>
           </tr>
           <tr>
+            <td><label for="name">Type:</label></td>
+            <td>
+              <input type="text" id="type" v-model="film.type" required />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="director">Director:</label></td>
+            <td>
+              <input type="text" id="director" v-model="film.director" required />
+            </td>
+          </tr>
+          <tr>
             <td><label for="rating">Rating:</label></td>
             <td>
               <input type="text" id="rating" v-model="film.rating" required />
@@ -62,12 +74,15 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
       film: {
         name: "",
         country: "",
+        type: "",
+        director: "",
         rating: "",
         cast: [],
         duration: "",
@@ -79,15 +94,68 @@ export default {
     };
   },
   methods: {
-    addFilm() {
+    async addFilm() {
       // Convert cast and catalog input strings to arrays
       this.film.cast = this.castInput.split(",").map((item) => item.trim());
       this.film.catalog = this.catalogInput
         .split(",")
         .map((item) => item.trim());
-
       // Emit an event to notify the parent component with the new film data
       this.$emit("add-film", this.film);
+
+      let sid='';
+      let len=Math.floor(Math.random()*(5))+6;
+      const numbers='0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';  
+      for (let i=0;i<len;i++){
+          sid=sid+numbers.charAt(Math.random()*numbers.length);
+      }
+      for (let k=0;k<this.film.cast.length;k++){
+        for (let i=0;i<this.film.catalog.length;i++){
+          let formData = {
+            show_id: sid,
+            title: this.film.name,
+            type: this.film.type,
+            director: this.film.director,
+            cast: this.film.cast[k],
+            rating: this.film.rating,
+            duration: this.film.duration,
+            catalog: this.film.catalog[i],
+            country: this.film.country,
+            release_year: this.film.release_year,
+            average_score: 0,
+            score_count: 0
+          }
+          await axios
+          .post("/api/AllForm/", formData)
+          .then(response =>{
+              console.log(response)
+          })
+          .catch(error =>{
+              console.log(error)
+          })
+        }
+        
+      }
+
+      for (let i=0;i<this.film.cast.length;i++){
+        let formData = {
+          show_id: sid,
+          cast: this.film.cast[i],
+        }
+        await axios
+        .post("/api/AllCast/", formData)
+        .then(response =>{
+            console.log(response)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+      }
+      
+      console.log(sid);
+      console.log(this.film);
+      console.log(this.film.name);
+      
 
       // Clear form fields
       this.film = {

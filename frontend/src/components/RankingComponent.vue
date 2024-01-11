@@ -8,8 +8,8 @@
         class="ranking-item"
       >
         <div class="rank">{{ index + 1 }}</div>
-        <div class="name">{{ item.name }}</div>
-        <div class="score">Score: {{ item.avg_score }}</div>
+        <div class="name">{{ item.title }}</div>
+        <div class="score">Score: {{ item.average_score }}</div>
       </li>
     </ul>
   </div>
@@ -28,7 +28,7 @@ export default {
     sortedItems() {
       return this.items
         .slice()
-        .sort((a, b) => b.score - a.score) // Sort by descending score
+        .sort((a, b) => b.avg - a.avg) // Sort by descending score
         .slice(0, 10); // Get top 10 items
     },
   },

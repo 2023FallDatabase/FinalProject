@@ -36,7 +36,7 @@ const routes = [
     component: useComment,
   },
   {
-    path: "/RatingComponent/:showId",
+    path: "/RatingComponent/:show_id",
     name: "RatingComponent",
     component: RatingComponent,
   },

@@ -5,8 +5,10 @@
       <router-link to="/about">Add Film</router-link> |
       <router-link to="/UpdateView">Update Film</router-link>|
       <router-link to="/useComment">useComment</router-link>|
-      <router-link to="/LoginView">Log in</router-link>|
-      <router-link to="/SignUp">Sign Up</router-link>
+      <!--router-link to="/LoginView">Log in</router-link-->|
+      <!--router-link to="/SignUp">Sign Up</router-link-->
+      <a href="http://127.0.0.1:8000/login/">Log in</a>|
+      <a href="http://127.0.0.1:8000/register/">Sign up</a>
     </nav>
     <router-view />
   </div>

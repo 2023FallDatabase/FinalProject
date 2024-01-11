@@ -7,27 +7,39 @@
       <table>
         <tbody>
           <tr>
-            <td><label for="name">ID:</label></td>
+            <td><label for="show_id">ID:</label></td>
             <td>
-              <input type="text" id="ID" v-model="film.showId" required />
+              <input type="text" id="show_id" v-model="film.show_id" required />
             </td>
           </tr>
           <tr>
-            <td><label for="name">Name:</label></td>
+            <td><label for="title">Name:</label></td>
             <td>
-              <input type="text" id="name" v-model="film.name" required />
+              <input type="text" id="title" v-model="film.title" />
             </td>
           </tr>
           <tr>
             <td><label for="country">Country:</label></td>
             <td>
-              <input type="text" id="country" v-model="film.country" required />
+              <input type="text" id="country" v-model="film.country"  />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="type">Type:</label></td>
+            <td>
+              <input type="text" id="type" v-model="film.type"  />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="director">Director:</label></td>
+            <td>
+              <input type="text" id="director" v-model="film.director"  />
             </td>
           </tr>
           <tr>
             <td><label for="rating">Rating:</label></td>
             <td>
-              <input type="text" id="rating" v-model="film.rating" required />
+              <input type="text" id="rating" v-model="film.rating"  />
             </td>
           </tr>
           <tr>
@@ -41,7 +53,7 @@
                 type="text"
                 id="duration"
                 v-model="film.duration"
-                required
+                
               />
             </td>
           </tr>
@@ -52,7 +64,7 @@
                 type="text"
                 id="releaseYear"
                 v-model="film.release_year"
-                required
+                
               />
             </td>
           </tr>
@@ -68,16 +80,20 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
       film: {
-        name: "",
+        show_id: "",
+        title: "",
         country: "",
+        type: "",
+        director: "",
         rating: "",
         cast: [],
         duration: "",
-        release_year: "",
+        release_year: 0,
         catalog: [],
       },
       castInput: "",
@@ -94,10 +110,28 @@ export default {
 
       // Emit an event to notify the parent component with the new film data
       this.$emit("Update-film", this.film);
-
+      console.log(this.film.show_id);
+      axios
+        .patch(`/api/OneForm/${this.film.show_id}`, {
+          country: this.film.country,
+          type: this.film.type,
+          title: this.film.title,
+          cast: this.film.cast[0],
+          duration: this.film.duration,
+          catalog: this.film.catalog[0],
+          release_year: this.film.release_year,
+          director: this.film.director,
+          rating: this.film.rating
+        })
+        .then(response =>{
+            console.log(response)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
       // Clear form fields
       this.film = {
-        name: "",
+        title: "",
         country: "",
         rating: "",
         cast: [],

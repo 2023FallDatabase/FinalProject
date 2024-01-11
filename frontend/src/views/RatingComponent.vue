@@ -5,8 +5,8 @@
     </header>
 
     <main>
-      <RatingComponent :initialRating="3" @update-rating="handleRatingUpdate" />
-      <CommentSection :comments="comments" @comment-submitted="addComment" />
+      <RatingComponent :initialRating="3" @update-rating="handleRatingUpdate" :show_id="show_id"/>
+      <CommentSection :comments.sync="comments" @submit-comment.prevent :show_id="show_id" />
     </main>
   </div>
 </template>
@@ -14,6 +14,7 @@
 <script>
 import RatingComponent from "../components/RatingComponent.vue";
 import CommentSection from "../components/CommentSection.vue";
+import axios from 'axios'
 export default {
   name: "App",
   components: {
@@ -22,6 +23,8 @@ export default {
   },
   data() {
     return {
+      id: 0,
+      show_id: "",
       comments: [], // Initial comments data
     };
   },
@@ -29,18 +32,38 @@ export default {
     handleRatingUpdate(newRating) {
       // Handle the updated rating
       console.log("New Rating:", newRating);
+      console.log(this.$route.params);
     },
-    addComment(newComment) {
-      this.comments.push(newComment);
-    },
-    created() {
-      // 在 created 鉤子中獲取 $route.params.showId
-      this.showId = this.$route.params.showId;
+    /*addComment(/*newComment) {
+      // this.comments.push(newComment);
+      // console.log(this.$route.params.show_id);
+      //console.log(newComment);
+      
+    },*/
+    getCommentList(){
+      axios.get(`/api/AllComment/${this.show_id}`)
+      .then(response=>{
+        console.log(response)
+        for (let i=0;i<response.data.length;i++){
+          const newcomment = {
+            id: Date.now(), // 假定每個評論都有一個唯一的ID
+            text: response.data[i].comment,
+          };
+          this.comments.push(newcomment);
+          console.log(newcomment);
+        }
+      }).catch(error=>{
+        console.log(error)
+      })
 
-      // 根據 showId 執行相應的邏輯，例如獲取該 ID 的數據
-      this.fetchShowData(this.showId);
-    },
+    }
   },
+  mounted(){
+    this.show_id=this.$route.params.show_id;
+    this.id=this.$route.params.id;
+    this.getCommentList();
+  },
+
 };
 </script>
 
@@ -57,7 +80,7 @@ header {
 }
 
 footer {
-  //background-color: #cde193;
+  background-color: #cde193;
   padding: 10px;
   position: fixed;
   bottom: 0;

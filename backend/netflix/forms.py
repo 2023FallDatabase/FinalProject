@@ -31,8 +31,7 @@ class form_model_form(forms.ModelForm):
             'catalog': '類別',
             'average_score': '平均分數',
             'score_count': '評分次數',
-            'comments': '留言'
-            
+            'comments': '留言' 
         }
 
 
